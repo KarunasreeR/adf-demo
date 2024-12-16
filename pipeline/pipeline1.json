@@ -100,6 +100,30 @@
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
 				}
+			},
+			{
+				"name": "new-age",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "update-name-script",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_newvalueage",
+					"value": {
+						"value": "select age from employees where employeeId=2",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -113,6 +137,12 @@
 		"variables": {
 			"v_age": {
 				"type": "Integer"
+			},
+			"v_updatedage": {
+				"type": "Integer"
+			},
+			"v_newvalueage": {
+				"type": "String"
 			}
 		},
 		"annotations": []
