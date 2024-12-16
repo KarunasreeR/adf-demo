@@ -64,6 +64,42 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "update-name-script",
+				"type": "Script",
+				"dependsOn": [
+					{
+						"activity": "update-age",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": {
+								"value": "@concat('update employees set age=',string(pipeline().parameters.p_newage),' where employeeid=',pipeline().parameters.p_empid)",
+								"type": "Expression"
+							}
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
 			}
 		],
 		"parameters": {
