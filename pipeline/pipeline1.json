@@ -53,7 +53,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "@concat('update employees set age=',string(pipeline().parameters.p_newage),'where employeeId=',pipeline().parameters.p_empid)",
+							"value": "@concat('update employees set age=',string(pipeline().parameters.p_newage),' where employeeId=',pipeline().parameters.p_empid)",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
