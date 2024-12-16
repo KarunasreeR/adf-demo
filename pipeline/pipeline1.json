@@ -93,7 +93,7 @@
 						{
 							"type": "Query",
 							"text": {
-								"value": "@concat('update employees set age=',string(pipeline().parameters.p_newage),' where employeeid=',pipeline().parameters.p_empid)",
+								"value": "@concat('update employees set salary=1',' where employeeid=',pipeline().parameters.p_empid)",
 								"type": "Expression"
 							}
 						}
