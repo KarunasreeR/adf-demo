@@ -51,8 +51,8 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Script1-update",
-							"type": "Script",
+							"name": "Stored procedure1",
+							"type": "SqlServerStoredProcedure",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -62,21 +62,28 @@
 								"secureInput": false
 							},
 							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[UpdateEmployeeAge]",
+								"storedProcedureParameters": {
+									"EmployeeId": {
+										"value": {
+											"value": "@item().employeeId",
+											"type": "Expression"
+										},
+										"type": "Int64"
+									},
+									"NewAge": {
+										"value": {
+											"value": "@add(item().age, item().employeeId)",
+											"type": "Expression"
+										},
+										"type": "Int64"
+									}
+								}
+							},
 							"linkedServiceName": {
 								"referenceName": "AzureSqlDatabase1",
 								"type": "LinkedServiceReference"
-							},
-							"typeProperties": {
-								"scripts": [
-									{
-										"type": "Query",
-										"text": {
-											"value": "@concat('update employees set age=age+1 where employeeId=',item().employeeId)",
-											"type": "Expression"
-										}
-									}
-								],
-								"scriptBlockExecutionTimeout": "02:00:00"
 							}
 						}
 					]
