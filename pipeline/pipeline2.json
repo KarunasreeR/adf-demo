@@ -34,9 +34,20 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Lookup2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup2').output.value",
+						"type": "Expression"
+					},
 					"isSequential": true,
 					"activities": [
 						{
@@ -60,7 +71,7 @@
 									{
 										"type": "Query",
 										"text": {
-											"value": "@concat('update employees set age=age+1 where employeeId=',item().value.employeeId)",
+											"value": "@concat('update employees set age=age+1 where employeeId=',item().employeeId)",
 											"type": "Expression"
 										}
 									}
